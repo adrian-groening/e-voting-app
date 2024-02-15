@@ -21,39 +21,27 @@ import com.vaadin.flow.theme.lumo.LumoUtility.Width;
 
 public class HomeViewCard extends ListItem {
 
-    public HomeViewCard(String text, String url) {
+    public HomeViewCard(String name, String bio, String party) {
         addClassNames(Background.CONTRAST_5, Display.FLEX, FlexDirection.COLUMN, AlignItems.START, Padding.MEDIUM,
                 BorderRadius.LARGE);
 
-        Div div = new Div();
-        div.addClassNames(Background.CONTRAST, Display.FLEX, AlignItems.CENTER, JustifyContent.CENTER,
-                Margin.Bottom.MEDIUM, Overflow.HIDDEN, BorderRadius.MEDIUM, Width.FULL);
-        div.setHeight("160px");
-
-        Image image = new Image();
-        image.setWidth("100%");
-        image.setSrc(url);
-        image.setAlt(text);
-
-        div.add(image);
-
         Span header = new Span();
         header.addClassNames(FontSize.XLARGE, FontWeight.SEMIBOLD);
-        header.setText("Title");
+        header.setText(name);
 
         Span subtitle = new Span();
         subtitle.addClassNames(FontSize.SMALL, TextColor.SECONDARY);
-        subtitle.setText("Card subtitle");
+        subtitle.setText(party);
 
-        Paragraph description = new Paragraph(
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.");
+        Paragraph description = new Paragraph(bio);
         description.addClassName(Margin.Vertical.MEDIUM);
 
         Span badge = new Span();
         badge.getElement().setAttribute("theme", "badge");
-        badge.setText("Label");
+        badge.setText("Votes: 0");
 
-        add(div, header, subtitle, description, badge);
+
+        add(header, subtitle, description, badge);
 
     }
 }

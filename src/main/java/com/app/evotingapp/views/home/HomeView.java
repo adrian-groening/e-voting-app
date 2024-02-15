@@ -1,7 +1,9 @@
 package com.app.evotingapp.views.home;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import com.app.evotingapp.Entities.candidate;
 import com.app.evotingapp.services.FirebaseService;
 import com.app.evotingapp.views.MainLayout;
 import com.google.cloud.firestore.DocumentReference;
@@ -44,8 +46,11 @@ public class HomeView extends Main implements HasComponents, HasStyle {
         constructUI();
         firebaseService = new FirebaseService();
 
-        Notification.show(firebaseService.getDocumentData("candidates", "gTKhh8sc7ylltjDjW5PP"));
-
+        //Notification.show(firebaseService.getDocumentData("candidates", "gTKhh8sc7ylltjDjW5PP"));
+        List<candidate> candidates = firebaseService.getCandidates();
+        for (candidate candidate : candidates) {
+                imageContainer.add(new HomeViewCard(candidate.getName(), candidate.getBio(), candidate.getParty()));
+        }
     }
 
     private void constructUI() {
@@ -56,9 +61,9 @@ public class HomeView extends Main implements HasComponents, HasStyle {
         container.addClassNames(AlignItems.CENTER, JustifyContent.BETWEEN);
 
         VerticalLayout headerContainer = new VerticalLayout();
-        H2 header = new H2("Beautiful photos");
+        H2 header = new H2("Vote for your desired candidate!");
         header.addClassNames(Margin.Bottom.NONE, Margin.Top.XLARGE, FontSize.XXXLARGE);
-        Paragraph description = new Paragraph("Royalty free photos and pictures, courtesy of Unsplash");
+        Paragraph description = new Paragraph("E-Voting Web Application: Empowering Democracy Through Digital Voting");
         description.addClassNames(Margin.Bottom.XLARGE, Margin.Top.NONE, TextColor.SECONDARY);
         headerContainer.add(header, description);
 
