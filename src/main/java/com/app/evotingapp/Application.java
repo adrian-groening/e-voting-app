@@ -30,6 +30,7 @@ public class Application implements AppShellConfigurator {
             // Initialize Firebase
             FileInputStream serviceAccount = new FileInputStream("key/e-voting-app-68c59-firebase-adminsdk-gs98y-d5521965ed.json");
 
+            
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                     .build();
