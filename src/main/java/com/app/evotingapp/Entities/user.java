@@ -1,15 +1,16 @@
 package com.app.evotingapp.Entities;
 
 public class user {
-    String name, email, hash;
+    String name, email, hash, id;
     public user() {
         super();
     }
-    public user(String name, String email, String hash) {
+    public user(String name, String email, String id, String hash) {
         super();
         this.name = name;
         this.email = email;
         this.hash = hash;
+        this.id = id;
     }
     public String getName() {
         return name;
@@ -20,6 +21,9 @@ public class user {
     public String getHash() {
         return hash;
     }
+    public String getId() {
+        return id;
+    }
     public void setName(String name) {
         this.name = name;
     }
@@ -29,5 +33,7 @@ public class user {
     public void setHash(String hash) {
         this.hash = hash;
     }
-    
+    public void setId(String id) {
+        this.id = id;
+    }
 }

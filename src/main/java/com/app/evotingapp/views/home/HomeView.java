@@ -6,20 +6,14 @@ import java.util.concurrent.ExecutionException;
 import com.app.evotingapp.Entities.candidate;
 import com.app.evotingapp.services.FirebaseService;
 import com.app.evotingapp.views.MainLayout;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.DocumentSnapshot;
-import com.google.cloud.firestore.Firestore;
-import com.google.firebase.cloud.FirestoreClient;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.html.OrderedList;
 import com.vaadin.flow.component.html.Paragraph;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
@@ -40,38 +34,32 @@ import com.vaadin.flow.theme.lumo.LumoUtility.TextColor;
 public class HomeView extends Main implements HasComponents, HasStyle {
 
     private OrderedList imageContainer;
-    FirebaseService firebaseService;
+    FirebaseService firebaseService = new FirebaseService();
 
     public HomeView() throws InterruptedException, ExecutionException {
         constructUI();
-        firebaseService = new FirebaseService();
-
-        //Notification.show(firebaseService.getDocumentData("candidates", "gTKhh8sc7ylltjDjW5PP"));
-        List<candidate> candidates = firebaseService.getCandidates();
-        for (candidate candidate : candidates) {
-                imageContainer.add(new HomeViewCard(candidate.getName(), candidate.getBio(), candidate.getParty()));
-        }
+        addCandidates(); 
     }
-
     private void constructUI() {
         addClassNames("home-view");
         addClassNames(MaxWidth.SCREEN_LARGE, Margin.Horizontal.AUTO, Padding.Bottom.LARGE, Padding.Horizontal.LARGE);
-
         HorizontalLayout container = new HorizontalLayout();
         container.addClassNames(AlignItems.CENTER, JustifyContent.BETWEEN);
-
         VerticalLayout headerContainer = new VerticalLayout();
         H2 header = new H2("Vote for your desired candidate!");
         header.addClassNames(Margin.Bottom.NONE, Margin.Top.XLARGE, FontSize.XXXLARGE);
         Paragraph description = new Paragraph("E-Voting Web Application: Empowering Democracy Through Digital Voting");
         description.addClassNames(Margin.Bottom.XLARGE, Margin.Top.NONE, TextColor.SECONDARY);
         headerContainer.add(header, description);
-
         imageContainer = new OrderedList();
         imageContainer.addClassNames(Gap.MEDIUM, Display.GRID, ListStyleType.NONE, Margin.NONE, Padding.NONE);
-
         container.add(headerContainer);
         add(container, imageContainer);
-
+    }
+    public void addCandidates() throws InterruptedException, ExecutionException {
+        List<candidate> candidates = firebaseService.getCandidates();
+        for (candidate candidate : candidates) {
+                imageContainer.add(new HomeViewCard(candidate));
+        }
     }
 }

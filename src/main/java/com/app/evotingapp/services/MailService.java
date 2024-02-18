@@ -12,18 +12,12 @@ public class MailService {
     public MailService(String email) {
         this.email = email;
     }
-
     public boolean checkEmail() throws Exception {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://api.mailcheck.ai/email/" + email ))
                 .build();
-
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        
-
-
         String responseBody = response.body();
         return responseBody.contains("\"disposable\":false");
     }

@@ -26,7 +26,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Application implements AppShellConfigurator {
 
     public static void main(String[] args) {
-
         try {
             // Initialize Firebase
             FileInputStream serviceAccount = new FileInputStream("key/e-voting-app-68c59-firebase-adminsdk-gs98y-d5521965ed.json");
@@ -42,8 +41,6 @@ public class Application implements AppShellConfigurator {
             e.printStackTrace();
             return;
         }
-
-
         SpringApplication.run(Application.class, args);
     }
 
