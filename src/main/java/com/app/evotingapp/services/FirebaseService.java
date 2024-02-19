@@ -96,4 +96,9 @@ public class FirebaseService {
         QuerySnapshot querySnapshot = query.get().get();
         return querySnapshot.size();
     }
+    public int getVoteCount() throws InterruptedException, ExecutionException {
+        CollectionReference votesRef = db.collection("votes");
+        QuerySnapshot querySnapshot = votesRef.get().get();
+        return querySnapshot.size();
+    }
 }
