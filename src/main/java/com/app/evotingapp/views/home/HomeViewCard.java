@@ -40,7 +40,7 @@ public class HomeViewCard extends ListItem {
         Span badge = new Span();
         badge.getElement().setAttribute("theme", "badge");
         try {
-            badge.setText("Poll: " + (((firebaseService.getVotes(candidate)*100)/firebaseService.getVoteCount())) +"%");
+            badge.setText("Poll: " + (((firebaseService.getVotes(candidate)*100)/firebaseService.getVoteCount())) + "%");
         } catch (InterruptedException e) {
             //To do: Decide how the error will be handled
             e.printStackTrace();
